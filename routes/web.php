@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.index');
+});
+
+Route::group(['prefix'=>'test'], function () {
+    Route::group(['prefix'=>'admin'], function () {
+        Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@index']);
+    });
 });

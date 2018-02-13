@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('admin.index');
+    return view('admin.pages.index');
 });
 
 Route::group(['prefix'=>'test'], function () {
@@ -23,6 +23,8 @@ Route::group(['prefix'=>'test'], function () {
         Route::get('/404', ['as'=>'admin.error404','uses'=>'DashboardController@error404']);
         Route::group(['prefix'=>'user'], function() {
             Route::get('/add', ['as'=>'admin.user.add','uses'=>'UserController@add']);
+            Route::get('/list', ['as'=>'admin.user.list','uses'=>'UserController@list']);
+            Route::get('/edit', ['as'=>'admin.user.edit','uses'=>'UserController@edit']);
         });
     });
     

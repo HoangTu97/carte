@@ -74,7 +74,7 @@
         @include('admin.components.salesreport')
     </div>
     <div class="masonry-item col-md-6">
-        @include('admin.components.weather',[])
+        @include('admin.components.weather')
     </div>
     <div class="masonry-item col-md-6">
         @include('admin.components.quickchat')

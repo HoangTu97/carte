@@ -1,51 +1,39 @@
 <div class="bgc-white p-20 bd">
-    <h6 class="c-grey-900">Complex Form Layout</h6>
+    <h6 class="c-grey-900">{{ $formTitle }}</h6>
     <div class="mT-30">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox checkbox-circle checkbox-info peers ai-c">
-                    <input type="checkbox" id="inputCall2" name="inputCheckboxesCall" class="peer">
-                    <label for="inputCall2" class=" peers peer-greed js-sb ai-c">
-                        <span class="peer peer-greed">Call John for Dinner</span>
-                    </label>
-                </div>
-            </div>
+        {{ Form::open(array('route'=>$formAction, 'method'=>$formMethod)) }}
+            @foreach($formData as $row)
+                {!! count($row)>1 ? '<div class="form-row">' : '' !!}
+                    @foreach ($row as $dt)
+                    <div class="form-group {{ isset($dt['size']) ? 'col-md-'.$dt['size'] : '' }}">
+                        @if($dt['type'] != 'checkbox')
+                            <label for="{{ $dt['id'] }}">{{ $dt['label'] }}</label>
+
+                            @switch($dt['type'])
+                                @case('input')
+                                <input type="{{ $dt['inputType'] }}" class="form-control" id="{{ $dt['id'] }}" placeholder="{{ $dt['placeholder'] or '' }}"> @break
+
+                                @case('select')
+                                <select id="{{ $dt['id'] }}" class="form-control">
+                                    @foreach($dt['options'] as $opt)
+                                    <option {{ isset($opt['selected']) ? 'selected' : '' }}>{{ $opt['value'] }}</option>
+                                    @endforeach
+                                </select>@break
+
+                            @endswitch
+                        @else
+                            <div class="checkbox checkbox-circle checkbox-info peers ai-c">
+                                <input type="checkbox" id="{{ $dt['id'] }}" name="{{ $dt['name'] }}" class="peer">
+                                <label for="{{ $dt['id'] }}" class=" peers peer-greed js-sb ai-c">
+                                    <span class="peer peer-greed">Call John for Dinner</span>
+                                </label>
+                            </div>
+                        @endif
+                    </div>
+                    @endforeach
+                {!! count($row)>1 ? '</div>' : '' !!}
+            @endforeach
             <button type="submit" class="btn btn-primary">Sign in</button>
-        </form>
+        {{ Form::close() }}
     </div>
 </div>

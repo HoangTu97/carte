@@ -8,7 +8,9 @@ use Storage;
 class RestaurantController extends Controller
 {
     public function add() {
-        return view('admin.pages.restaurant.add');
+        $data = Storage::disk('local')->get('data\restaurantFormAdd.json');
+        $data_decoded = json_decode($data,true);
+        return view('admin.pages.restaurant.add', ['restaurantAdd'=> $data_decoded]);
     }
 
     public function edit() {

@@ -11,9 +11,9 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('admin.pages.index');
-// });
+if (env('APP_ENV') === 'production') {
+    URL::forceSchema('https');
+}
 
 Route::group(['prefix'=>'admin'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);

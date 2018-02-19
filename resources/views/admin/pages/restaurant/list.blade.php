@@ -6,6 +6,7 @@
         'datatableTitle'=>'Restaurants',
         'datatableMethod'=>'list',
         'datatableFields'=>$restaurants['fields'], 
-        'datatableValues'=>$restaurants['values']])
+        'datatableValues'=>$restaurants['values'],
+        'datatableRouteNameControl'=>'admin.restaurant'])
 
 @endsection

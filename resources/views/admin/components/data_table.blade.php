@@ -6,23 +6,36 @@
                 <thead>
                     <tr>
                         @foreach($datatableFields as $field)
-                        <th>{{ $field }}</th>
+                        <th>{{ strtoupper($field) }}</th>
                         @endforeach
+                        <th>OPTION</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         @foreach($datatableFields as $field)
-                        <th>{{ $field }}</th>
+                        <th>{{ strtoupper($field) }}</th>
                         @endforeach
+                        <th>OPTION</th>
                     </tr>
                 </tfoot>
+
+                
                 <tbody>
                     @foreach($datatableValues as $v)
                     <tr>
                         @foreach($datatableFields as $f)
-                        <td>{{ $v[$f] }}</td>
+                        <td>
+                            @switch($f)
+                                @case('nom') <a href="{{ route($datatableRouteNameControl.'.view',['id'=>$v['id']]) }}">{!! $v[$f] !!}</a> @break
+                                @default {!! $v[$f] !!} @break
+                            @endswitch
+                        </td>
                         @endforeach
+                        <td>
+                            <a href="{{ route($datatableRouteNameControl.'.edit',['id'=>$v['id']]) }}">edit</a><br/><br/>
+                            <a href="{{ route($datatableRouteNameControl.'.delete',['id'=>$v['id']]) }}">delete</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

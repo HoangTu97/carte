@@ -2,9 +2,10 @@
 
 @section('content')
     @include('admin.components.form_complex', [
-        'formTitle'=>'Validation',
+        'formTitle'=>'Restaurant Add',
         'formData'=>$restaurantAdd,
         'formAction'=>'admin.restaurant.add',
-        'formMethod'=>'post'
+        'formMethod'=>'post',
+        'formFunc'=>'Add'
         ])
 @endsection

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('admin.pages.index');
-});
+// Route::get('/', function () {
+//     return view('admin.pages.index');
+// });
 
 Route::group(['prefix'=>'admin'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);
@@ -27,7 +27,11 @@ Route::group(['prefix'=>'admin'], function () {
     });
     Route::group(['prefix'=>'restaurant'], function() {
         Route::get('/add', ['as'=>'admin.restaurant.add','uses'=>'RestaurantController@add']);
+        Route::post('/add', ['as'=>'admin.restaurant.postAdd','uses'=>'RestaurantController@postAdd']);
         Route::get('/list', ['as'=>'admin.restaurant.list','uses'=>'RestaurantController@list']);
-        Route::get('/edit', ['as'=>'admin.restaurant.edit','uses'=>'RestaurantController@edit']);
+        Route::get('/edit/{id}', ['as'=>'admin.restaurant.edit','uses'=>'RestaurantController@edit']);
+        Route::post('/edit/{id}', ['as'=>'admin.restaurant.postEdit','uses'=>'RestaurantController@postEdit']);
+        Route::get('/delete/{id}', ['as'=>'admin.restaurant.delete','uses'=>'RestaurantController@delete']);
+        Route::get('/view/{id}', ['as'=>'admin.restaurant.view','uses'=>'RestaurantController@view']);
     });
 });

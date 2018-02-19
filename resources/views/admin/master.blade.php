@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
     <title>Dashboard</title>
     @include('admin.blocks.style')
+    
+    @yield('customStyle')
 
 </head>
 
@@ -44,6 +46,8 @@
     @show
     
     @include('admin.blocks.script')
+
+    @yield('customScript')
 </body>
 
 </html>

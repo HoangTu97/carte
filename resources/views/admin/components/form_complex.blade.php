@@ -19,6 +19,8 @@
                                     <option {{ isset($opt['selected']) ? 'selected' : '' }}>{{ $opt['value'] }}</option>
                                     @endforeach
                                 </select>@break
+                                @case('textarea')
+                                <textarea id="{{ $dt['id'] }}" class="form-control" rows="5"></textarea>@break
 
                             @endswitch
                         @else
@@ -33,7 +35,7 @@
                     @endforeach
                 {!! count($row)>1 ? '</div>' : '' !!}
             @endforeach
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary btn-block">{{ $formFunc }}</button>
         {{ Form::close() }}
     </div>
 </div>

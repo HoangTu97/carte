@@ -1,0 +1,86 @@
+[
+    [{
+        "size": 6,
+        "id": "inputEmail4",
+        "label": "Nom",
+        "type": "input",
+        "inputType": "text",
+        "placeholder": "Nom de restaurant"
+    }, {
+        "size": 4,
+        "id": "inputPassword4",
+        "label": "Type",
+        "type": "input",
+        "inputType": "text",
+        "placeholder": "Type"
+    }, {
+        "size": 2,
+        "id": "inputPassword4",
+        "label": "Classement",
+        "type": "input",
+        "inputType": "text",
+        "placeholder": "4 \u00e9toiles"
+    }],
+    [{
+        "id": "inputAddress",
+        "label": "Address",
+        "type": "input",
+        "inputType": "text",
+        "placeholder": "1234 Main St"
+    }],
+    [{
+            "size": 6,
+            "id": "inputCity",
+            "label": "Commune",
+            "type": "input",
+            "inputType": "text"
+        },
+        {
+            "size": 4,
+            "id": "inputState",
+            "label": "State",
+            "type": "select",
+            "options": [{
+                    "selected": true,
+                    "value": "Choose..."
+                },
+                {
+                    "value": "..."
+                }
+            ]
+        },
+        {
+            "size": 2,
+            "id": "inputZip",
+            "label": "Codepostal",
+            "type": "input",
+            "inputType": "text"
+        }
+    ],
+    [{
+        "size": 6,
+        "id": "inputAddress",
+        "label": "Siteweb",
+        "type": "input",
+        "inputType": "text",
+        "placeholder": "http://www.salvagny.org"
+    }, {
+        "size": 3,
+        "id": "inputAddress",
+        "label": "Tarifs min",
+        "type": "input",
+        "inputType": "number"
+    }, {
+        "size": 3,
+        "id": "inputAddress",
+        "label": "Tarifs max",
+        "type": "input",
+        "inputType": "number"
+    }],
+    [{
+        "id": "inputAddress",
+        "label": "Tarifs en clair",
+        "type": "input",
+        "inputType": "text"
+    }]
+]

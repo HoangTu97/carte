@@ -11,10 +11,6 @@
 |
 */
 
-if (env('APP_ENV') === 'production') {
-    URL::forceSchema('https');
-}
-
 Route::group(['prefix'=>'admin'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);
     Route::get('/signin', ['as'=>'admin.signin','uses'=>'DashboardController@signin']);

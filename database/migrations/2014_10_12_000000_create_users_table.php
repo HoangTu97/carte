@@ -13,17 +13,22 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('idUser');
-            $table->string('username');
-            $table->string('password');
-            $table->string('email');
-            $table->string('prenom');
-            $table->string('nom');
-            $table->string('address');
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        DB::statement('CREATE SEQUENCE user_id_seq;');
+        DB::statement("
+            CREATE TABLE \"User\"
+            (
+                id        INTEGER DEFAULT nextval('user_id_seq' :: REGCLASS) NOT NULL
+                    CONSTRAINT \"User_pkey\"
+                    PRIMARY KEY,
+                username  VARCHAR(20)                                        NOT NULL,
+                password  VARCHAR(20)                                        NOT NULL,
+                email     VARCHAR(50),
+                firstname VARCHAR(50),
+                lastname  VARCHAR(50),
+                adress    VARCHAR(250),
+                level     BIT
+            );
+        ");
     }
 
     /**
@@ -33,6 +38,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('User');
+        DB::statement('DROP SEQUENCE IF EXISTS user_id_seq');
     }
 }

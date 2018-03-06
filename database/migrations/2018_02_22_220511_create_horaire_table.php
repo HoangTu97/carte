@@ -14,7 +14,7 @@ class CreateHoraireTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Horaire"
+            CREATE TABLE horaire
             (
                 id           SERIAL NOT NULL
                     CONSTRAINT "Horaire_pkey"
@@ -34,6 +34,6 @@ class CreateHoraireTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Horaire');
+        Schema::dropIfExists('horaire');
     }
 }

@@ -14,7 +14,7 @@ class CreateContactTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Contact"
+            CREATE TABLE contact
             (
                 id            SERIAL       NOT NULL
                     CONSTRAINT "Contact_pkey"
@@ -38,6 +38,6 @@ class CreateContactTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Contact');
+        Schema::dropIfExists('contact');
     }
 }

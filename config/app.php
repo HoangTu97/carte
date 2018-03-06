@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\ComposerServiceProvider::class,
+        Folklore\GraphQL\ServiceProvider::class,
     ],
 
     /*
@@ -229,6 +230,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'GraphQL' => Folklore\GraphQL\Support\Facades\GraphQL::class,
 
     ],
 

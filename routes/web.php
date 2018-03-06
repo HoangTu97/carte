@@ -31,3 +31,7 @@ Route::group(['prefix'=>'admin'], function () {
         Route::get('/view/{id}', ['as'=>'admin.restaurant.view','uses'=>'RestaurantController@view']);
     });
 });
+
+
+Route::get('/test', function () {
+});

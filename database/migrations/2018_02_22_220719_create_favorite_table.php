@@ -14,7 +14,7 @@ class CreateFavoriteTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Favorite"
+            CREATE TABLE favorite
             (
                 id            SERIAL NOT NULL
                     CONSTRAINT "Favorite_pkey"
@@ -32,6 +32,6 @@ class CreateFavoriteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Favorite');
+        Schema::dropIfExists('favorite');
     }
 }

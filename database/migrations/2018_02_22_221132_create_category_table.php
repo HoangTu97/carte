@@ -14,7 +14,7 @@ class CreateCategoryTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Category"
+            CREATE TABLE category
             (
                 id               SERIAL NOT NULL
                     CONSTRAINT "Category_pkey"
@@ -41,6 +41,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Category');
+        Schema::dropIfExists('category');
     }
 }

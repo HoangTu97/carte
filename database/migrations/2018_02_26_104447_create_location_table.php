@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHoraireTable extends Migration
+class CreateLocationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,15 +14,14 @@ class CreateHoraireTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE horaire
+            CREATE TABLE location
             (
-                id           SERIAL NOT NULL
-                    CONSTRAINT "Horaire_pkey"
-                    PRIMARY KEY,
-                idrestaurant INTEGER,
-                date         TEXT,
-                open         TEXT,
-                close        TEXT
+                id_rest   INTEGER,
+                address   VARCHAR(100),
+                code_postal       INTEGER,
+                commune           VARCHAR(50),
+                latitude  DOUBLE PRECISION,
+                longitude DOUBLE PRECISION
             );
         ');
     }
@@ -34,6 +33,6 @@ class CreateHoraireTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('horaire');
+        Schema::dropIfExists('location');
     }
 }

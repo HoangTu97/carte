@@ -14,7 +14,7 @@ class CreateFeedbackTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Feedback"
+            CREATE TABLE feedback
             (
                 id          SERIAL NOT NULL
                     CONSTRAINT "Feedback_pkey"
@@ -37,6 +37,6 @@ class CreateFeedbackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Feedback');
+        Schema::dropIfExists('feedback');
     }
 }

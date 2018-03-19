@@ -14,14 +14,13 @@ class CreateRestaurantTable extends Migration
     public function up()
     {
         DB::statement('
-            CREATE TABLE "Restaurant"
+            CREATE TABLE restaurant
             (
                 id                SERIAL NOT NULL
                     CONSTRAINT restaurant_pkey
                     PRIMARY KEY,
                 name              VARCHAR(200),
                 category_id       INTEGER,
-                address           VARCHAR(100),
                 telephone         VARCHAR(200),
                 email             VARCHAR(100),
                 image             XML,
@@ -36,7 +35,6 @@ class CreateRestaurantTable extends Migration
                 show_on_home      BIT,
                 status            BIT,
                 classement        SMALLINT,
-                code_postal       INTEGER,
                 telephonefax      VARCHAR(50),
                 fax               VARCHAR(50),
                 tarifmin          DOUBLE PRECISION,
@@ -45,7 +43,6 @@ class CreateRestaurantTable extends Migration
                 facebook          VARCHAR(300),
                 type              VARCHAR(50),
                 type_detail       VARCHAR(500),
-                commune           VARCHAR(50),
                 producteur        VARCHAR(100)
             );
         ');
@@ -58,6 +55,6 @@ class CreateRestaurantTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Restaurant');
+        Schema::dropIfExists('restaurant');
     }
 }

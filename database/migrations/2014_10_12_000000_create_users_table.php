@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         DB::statement('CREATE SEQUENCE user_id_seq;');
         DB::statement("
-            CREATE TABLE \"User\"
+            CREATE TABLE \"user\"
             (
                 id        INTEGER DEFAULT nextval('user_id_seq' :: REGCLASS) NOT NULL
                     CONSTRAINT \"User_pkey\"
@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('User');
+        Schema::dropIfExists('user');
         DB::statement('DROP SEQUENCE IF EXISTS user_id_seq');
     }
 }

@@ -85,15 +85,24 @@ class RestaurantController extends Controller
         return $data_field;
     }
 
-    public function list() {
+    public function list(Request $req) {
         // $data_field = $this->fieldData();
         // $data_field = $this->field100();
-        $data_field = array();
+        // $data_field = array();
 
-        $data_field['fields'] = ['id','nom','type','ouverture','address','classement','contactez','tarif'];
-        $data_field['values'] = json_decode(json_encode(DB::table('restaurant')
-            ->join('location','restaurant.id','=','location.id_rest')
-            ->select('restaurant.id', 'restaurant.name as nom','restaurant.type','restaurant.type_detail AS ouverture', 'location.address','restaurant.classement', 'restaurant.website AS contactez', 'restaurant.tarifmax AS tarif')->get()->toArray()),true);
-        return view('admin.pages.restaurant.list', ['restaurants'=>$data_field]);
+        // $data_field['fields'] = ['id','nom','type','ouverture','address','classement','contactez','tarif'];
+        // $data_field['values'] = json_decode(json_encode(DB::table('restaurant')
+        //     ->join('location','restaurant.id','=','location.id_rest')
+        //     ->select('restaurant.id', 'restaurant.name as nom','restaurant.type','restaurant.type_detail AS ouverture', 'location.address','restaurant.classement', 'restaurant.website AS contactez', 'restaurant.tarifmax AS tarif')->get()->toArray()),true);
+        //return view('admin.pages.restaurant.list', ['restaurants'=>$data_field]);
+
+        if ($req->query('page')) {
+            echo "abc";
+        }
+        else {
+            return view('admin.pages.restaurant.list');
+        }
     }
+
+
 }

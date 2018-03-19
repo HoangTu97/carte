@@ -21,29 +21,30 @@ class LocationTableSeeder extends Seeder
         );
         $api_key_i = 0;
         foreach($locations as $loc) {
-            if ($loc->address) {
-                $geo_locat = json_decode(file_get_contents(
-                    //https://maps.googleapis.com/maps/api/geocode/json?address=3+rue+Tramassac&key=...
-                    "https://maps.googleapis.com/maps/api/geocode/json"
-                    ."?address=".urlencode($loc->address)
-                    ."&key=".$api_keys[$api_key_i]), true);
-                if($geo_locat['status']=='OVER_QUERY_LIMIT') {
-                    $api_key_i++;
-                    $geo_locat = json_decode(file_get_contents(
-                        //https://maps.googleapis.com/maps/api/geocode/json?address=Siège+:+Maison+des+Sociétés,+square+Grimma&key=...
-                        "https://maps.googleapis.com/maps/api/geocode/json"
-                        ."?address=".urlencode($loc->address)
-                        ."&key=".$api_keys[$api_key_i]), true);
-                }
+            if ($loc->address && !$loc->latitude) {
+                print($loc->address.'\n');
+                // $geo_locat = json_decode(file_get_contents(
+                //     //https://maps.googleapis.com/maps/api/geocode/json?address=3+rue+Tramassac&key=...
+                //     "https://maps.googleapis.com/maps/api/geocode/json"
+                //     ."?address=".urlencode($loc->address)
+                //     ."&key=".$api_keys[$api_key_i]), true);
+                // if($geo_locat['status']=='OVER_QUERY_LIMIT') {
+                //     $api_key_i++;
+                //     $geo_locat = json_decode(file_get_contents(
+                //         //https://maps.googleapis.com/maps/api/geocode/json?address=Siège+:+Maison+des+Sociétés,+square+Grimma&key=...
+                //         "https://maps.googleapis.com/maps/api/geocode/json"
+                //         ."?address=".urlencode($loc->address)
+                //         ."&key=".$api_keys[$api_key_i]), true);
+                // }
                 
-                if ($geo_locat['status'] == "OK") {
-                    DB::table('location')
-                        ->where('id_rest', $loc->id_rest)
-                        ->update([
-                            'latitude'=>$geo_locat['results'][0]['geometry']['location']['lat'],
-                            'longitude'=>$geo_locat['results'][0]['geometry']['location']['lng']
-                        ]);
-                }
+                // if ($geo_locat['status'] == "OK") {
+                //     DB::table('location')
+                //         ->where('id_rest', $loc->id_rest)
+                //         ->update([
+                //             'latitude'=>$geo_locat['results'][0]['geometry']['location']['lat'],
+                //             'longitude'=>$geo_locat['results'][0]['geometry']['location']['lng']
+                //         ]);
+                // }
             }
         }
     }

@@ -34,41 +34,43 @@ Route::group(['prefix'=>'admin'], function () {
 
 
 Route::get('/test', function () {
-    $locations = DB::table('location')->whereNull('latitude')->select('id_rest','address','latitude')->get();
-        // Google api keys
-        $api_keys = array(
-                    env('GOOGLE_API_KEY', 'AIzaSyD5_8b7XGLJ_665C2Og6YV8Two7XOPN4h8'),
-                    env('GOOGLE_API_KEY_2', 'AIzaSyAIKAChlwMHxXoIW95UdgDmU5cQy23Zi8o'),
-                    env('GOOGLE_API_KEY_3', 'AIzaSyA7Dxr163l0sH-gBMCGhU4T4XgKNYN-pYA'),
-                    env('GOOGLE_API_KEY_4', 'AIzaSyD164wJgRiJnqXZ87m6MRutlq1qYzu8DL8')
-        );
+    // $locations = DB::table('location')->whereNull('latitude')->select('id_rest','address','latitude')->get();
+    //     // Google api keys
+    //     $api_keys = array(
+    //                 env('GOOGLE_API_KEY', 'AIzaSyD5_8b7XGLJ_665C2Og6YV8Two7XOPN4h8'),
+    //                 env('GOOGLE_API_KEY_2', 'AIzaSyAIKAChlwMHxXoIW95UdgDmU5cQy23Zi8o'),
+    //                 env('GOOGLE_API_KEY_3', 'AIzaSyA7Dxr163l0sH-gBMCGhU4T4XgKNYN-pYA'),
+    //                 env('GOOGLE_API_KEY_4', 'AIzaSyD164wJgRiJnqXZ87m6MRutlq1qYzu8DL8')
+    //     );
 
-        $api_key_i = 0;
-        foreach($locations as $loc) {
-            // check null null position for not request all 
-            if ($loc->address && !$loc->latitude) {
-                $statusSuccess = false;
-                while(!$statusSuccess) {
-                    $queryString = "https://maps.googleapis.com/maps/api/geocode/json"."?address=".urlencode($loc->address)."&key=".$api_keys[$api_key_i];
-                    print("Address: " . $loc->address . " | " . $loc->latitude . '<br/>');
-                    print("Query: ".$queryString . "<br/>");
-                    $geo_locat = json_decode(file_get_contents($queryString), true);
+    //     $api_key_i = 0;
+    //     foreach($locations as $loc) {
+    //         // check null null position for not request all 
+    //         if ($loc->address && !$loc->latitude) {
+    //             $statusSuccess = false;
+    //             while(!$statusSuccess) {
+    //                 $queryString = "https://maps.googleapis.com/maps/api/geocode/json"."?address=".urlencode($loc->address)."&key=".$api_keys[$api_key_i];
+    //                 print("Address: " . $loc->address . " | " . $loc->latitude . '<br/>');
+    //                 print("Query: ".$queryString . "<br/>");
+    //                 $geo_locat = json_decode(file_get_contents($queryString), true);
 
-                    if ($geo_locat['status'] == 'OVER_QUERY_LIMIT') {
-                        $api_key_i++;
-                    } elseif ($geo_locat['status'] == 'ZERO_RESULTS') {
-                        $statusSuccess = true;
-                    } elseif ($geo_locat['status'] == 'OK') {
-                        $statusSuccess = true;
-                        DB::table('location')
-                            ->where('id_rest', $loc->id_rest)
-                            ->update([
-                                'latitude'=>$geo_locat['results'][0]['geometry']['location']['lat'],
-                                'longitude'=>$geo_locat['results'][0]['geometry']['location']['lng']
-                            ]);
-                    }
-                    echo $geo_locat['status'] . '<br/>';
-                }
-            }
-        }
+    //                 if ($geo_locat['status'] == 'OVER_QUERY_LIMIT') {
+    //                     $api_key_i++;
+    //                 } elseif ($geo_locat['status'] == 'ZERO_RESULTS') {
+    //                     $statusSuccess = true;
+    //                 } elseif ($geo_locat['status'] == 'OK') {
+    //                     $statusSuccess = true;
+    //                     DB::table('location')
+    //                         ->where('id_rest', $loc->id_rest)
+    //                         ->update([
+    //                             'latitude'=>$geo_locat['results'][0]['geometry']['location']['lat'],
+    //                             'longitude'=>$geo_locat['results'][0]['geometry']['location']['lng']
+    //                         ]);
+    //                 }
+    //                 echo $geo_locat['status'] . '<br/>';
+    //             }
+    //         }
+    //     }
+
+    
 });

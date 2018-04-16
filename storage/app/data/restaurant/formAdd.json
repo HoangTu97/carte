@@ -1,28 +1,28 @@
 [
     [{
         "size": 6,
-        "id": "inputEmail4",
+        "id": "nom",
         "label": "Nom",
         "type": "input",
         "inputType": "text",
         "placeholder": "Nom de restaurant"
     }, {
         "size": 4,
-        "id": "inputPassword4",
+        "id": "pass",
         "label": "Type",
         "type": "input",
         "inputType": "text",
         "placeholder": "Type"
     }, {
         "size": 2,
-        "id": "inputPassword4",
+        "id": "class",
         "label": "Classement",
         "type": "input",
         "inputType": "text",
         "placeholder": "4 \u00e9toiles"
     }],
     [{
-        "id": "inputAddress",
+        "id": "adress",
         "label": "Address",
         "type": "input",
         "inputType": "text",
@@ -30,14 +30,14 @@
     }],
     [{
             "size": 6,
-            "id": "inputCity",
+            "id": "commune",
             "label": "Commune",
             "type": "input",
             "inputType": "text"
         },
         {
             "size": 4,
-            "id": "inputState",
+            "id": "state",
             "label": "State",
             "type": "select",
             "options": [{
@@ -51,7 +51,7 @@
         },
         {
             "size": 2,
-            "id": "inputZip",
+            "id": "codepostal",
             "label": "Codepostal",
             "type": "input",
             "inputType": "text"
@@ -59,26 +59,26 @@
     ],
     [{
         "size": 6,
-        "id": "inputAddress",
+        "id": "site",
         "label": "Siteweb",
         "type": "input",
         "inputType": "text",
         "placeholder": "http://www.salvagny.org"
     }, {
         "size": 3,
-        "id": "inputAddress",
+        "id": "tarifmin",
         "label": "Tarifs min",
         "type": "input",
         "inputType": "number"
     }, {
         "size": 3,
-        "id": "inputAddress",
+        "id": "tarifmax",
         "label": "Tarifs max",
         "type": "input",
         "inputType": "number"
     }],
     [{
-        "id": "inputAddress",
+        "id": "tarifclair",
         "label": "Tarifs en clair",
         "type": "input",
         "inputType": "text"

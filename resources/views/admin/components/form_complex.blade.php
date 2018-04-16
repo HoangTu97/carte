@@ -11,16 +11,16 @@
 
                             @switch($dt['type'])
                                 @case('input')
-                                <input type="{{ $dt['inputType'] }}" class="form-control" id="{{ $dt['id'] }}" placeholder="{{ $dt['placeholder'] or '' }}"> @break
+                                <input type="{{ $dt['inputType'] }}" class="form-control" id="{{ $dt['id'] }}" name="{{ $dt['id'] }}" placeholder="{{ $dt['placeholder'] or '' }}"> @break
 
                                 @case('select')
-                                <select id="{{ $dt['id'] }}" class="form-control">
+                                <select id="{{ $dt['id'] }}" name="{{ $dt['id'] }}" class="form-control">
                                     @foreach($dt['options'] as $opt)
                                     <option {{ isset($opt['selected']) ? 'selected' : '' }}>{{ $opt['value'] }}</option>
                                     @endforeach
                                 </select>@break
                                 @case('textarea')
-                                <textarea id="{{ $dt['id'] }}" class="form-control" rows="5"></textarea>@break
+                                <textarea id="{{ $dt['id'] }}" name="{{ $dt['id'] }}" class="form-control" rows="5"></textarea>@break
 
                             @endswitch
                         @else

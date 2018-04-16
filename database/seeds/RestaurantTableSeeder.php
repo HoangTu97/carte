@@ -11,37 +11,21 @@ class RestaurantTableSeeder extends Seeder
      */
     public function run()
     {
-        $in = 'data\restaurant\all.json';
+        $table = "restaurant";
         $out = 'data\restaurant\all_filted.json';
-
-        // field data
-        if(!Storage::disk('local')->exists($out)) {
-            $data = Storage::disk('local')->get($in);
-            $data_decoded = json_decode($data,true);
-
-            $data_field['fields'] = $data_decoded['fields'];
-
-            foreach($data_decoded['values'] as $k => $v) {
-                if ($v['type'] == "RESTAURATION")
-                    $data_field['values'][] = $v;
-            }
-            Storage::disk('local')->put($out, json_encode($data_field));
-        }
 
         // main function
         $data = Storage::disk('local')->get($out);
         $data_decoded = json_decode($data,true);
-        
+
         foreach($data_decoded['values'] as $value) {
-            DB::table('restaurant')->insert([
+            DB::table($table)->insert([
                 'id' => $value['id'],
                 'name' => $value['nom'],
                 'classement' => intval($value['classement']),
                 'email' => $value['email'],
                 'website' => $value['siteweb'],
                 'facebook' => $value['facebook'],
-                'type' => $value['type'],
-                'type_detail' => $value['type_detail'],
                 'tarifenclair' => $value['tarifsenclair'],
                 'tarifmax' => round($value['tarifsmax'], 2),
                 'tarifmin' => round($value['tarifsmin'], 2),
@@ -51,12 +35,6 @@ class RestaurantTableSeeder extends Seeder
                 'created_date' => $value['date_creation'],
                 'edited_date' => $value['last_update_fme'],
                 'producteur' => $value['producteur']
-            ]);
-            DB::table('location')->insert([
-                'id_rest' => $value['id'],
-                'address' => $value['adresse'],
-                'code_postal' => $value['codepostal'],
-                'commune' => $value['commune'],
             ]);
         }
     }

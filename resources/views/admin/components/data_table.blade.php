@@ -20,7 +20,6 @@
                     </tr>
                 </tfoot>
 
-                
                 <tbody>
                     @foreach($datatableValues as $v)
                     <tr>

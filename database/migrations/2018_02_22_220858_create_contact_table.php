@@ -20,7 +20,6 @@ class CreateContactTable extends Migration
                     CONSTRAINT "Contact_pkey"
                     PRIMARY KEY,
                 username      VARCHAR(20)  NOT NULL,
-                password      VARCHAR(20)  NOT NULL,
                 email         VARCHAR(50),
                 firstname     VARCHAR(50),
                 lastname      VARCHAR(50),

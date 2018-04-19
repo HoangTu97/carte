@@ -35,6 +35,7 @@ class CategoryTableSeeder extends Seeder
                             'name' => $cate,
                             'idparent' => $parent->id
                         ]);
+                        
                     }
                 }
             }

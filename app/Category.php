@@ -25,5 +25,5 @@ class Category extends Model
      *
      * @var array
      */
-    public $fillable = ['name','idparent','img','details','metatitle','metadescriptions','showonhome'];
+    public $fillable = ['id', 'nom','idparent','img','details','metatitle','metadescriptions','showonhome'];
 }

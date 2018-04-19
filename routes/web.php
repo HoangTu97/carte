@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix'=>'admin'], function () {
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);
     Route::get('/signin', ['as'=>'admin.signin','uses'=>'DashboardController@signin']);
     Route::get('/signup', ['as'=>'admin.signup','uses'=>'DashboardController@signup']);
@@ -19,7 +19,9 @@ Route::group(['prefix'=>'admin'], function () {
     Route::group(['prefix'=>'user'], function() {
         Route::get('/add', ['as'=>'admin.user.add','uses'=>'UserController@add']);
         Route::get('/list', ['as'=>'admin.user.list','uses'=>'UserController@list']);
-        Route::get('/edit', ['as'=>'admin.user.edit','uses'=>'UserController@edit']);
+        Route::get('/edit/{id}', ['as'=>'admin.user.edit','uses'=>'UserController@edit']);
+        Route::get('/delete/{id}', ['as'=>'admin.user.delete','uses'=>'UserController@delete']);
+        Route::get('/view/{id}', ['as'=>'admin.user.view','uses'=>'UserController@view']);
     });
     Route::group(['prefix'=>'restaurant'], function() {
         Route::get('/add', ['as'=>'admin.restaurant.add','uses'=>'RestaurantController@add']);
@@ -30,18 +32,22 @@ Route::group(['prefix'=>'admin'], function () {
         Route::get('/delete/{id}', ['as'=>'admin.restaurant.delete','uses'=>'RestaurantController@delete']);
         Route::get('/view/{id}', ['as'=>'admin.restaurant.view','uses'=>'RestaurantController@view']);
     });
-    Route::group(['prefix'=>'cate'], function() {
-        Route::get('/add', ['uses'=>'CategoryController@add']);
+    Route::group(['prefix'=>'categorie'], function() {
+        Route::get('/add', ['as'=>'admin.cate.add', 'uses'=>'CategoryController@add']);
         Route::post('/add', ['uses'=>'CategoryController@postAdd']);
-        Route::get('/list', ['uses'=>'CategoryController@list']);
-        Route::get('/edit/{id}', ['uses'=>'CategoryController@edit']);
+        Route::get('/list', ['as'=>'admin.cate.list', 'uses'=>'CategoryController@list']);
+        Route::get('/edit/{id}', ['as'=>'admin.cate.edit', 'uses'=>'CategoryController@edit']);
         Route::post('/edit/{id}', ['uses'=>'CategoryController@postEdit']);
-        Route::get('/delete/{id}', ['uses'=>'CategoryController@delete']);
-        Route::get('/detail/{id}', ['uses'=>'CategoryController@detail']);
+        Route::get('/delete/{id}', ['as'=>'admin.cate.delete', 'uses'=>'CategoryController@delete']);
+        Route::get('/view/{id}', ['as'=>'admin.cate.view', 'uses'=>'CategoryController@view']);
     });
 });
 
-//Route::get('login', ['uses'=>'']);
+Route::get('login', ['as'=>'login', 'uses'=>'UserController@getLogin']);
+Route::post('login', ['uses'=>'UserController@postLogin']);
+Route::get('register', ['as'=>'register', 'uses'=>'UserController@getRegister']);
+Route::post('register', ['uses'=>'UserController@postRegister']);
+Route::get('logout', ['as'=>'logout','uses'=>'UserController@logout']);
 
 // Route::get('/test/address', function () {
 //     $error_request_file = 'data\\restaurant\\error_request.json';

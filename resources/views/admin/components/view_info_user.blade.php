@@ -134,22 +134,10 @@ img {
                 </ul>
             </div>
             <div class="details col-md-6">
-                <h4 class="c-grey-900 mB-20 product-title">{{ $viewdetailData['nom'] }} 
+                <h4 class="c-grey-900 mB-20 product-title">{{ $viewdetailData['username'] }} 
                     <a href="{{ route($viewdetailRouteNameControl.'.edit',['id'=>$viewdetailData['id']]) }}" class="badge badge-pill badge-primary">Edit</a>
                     <a href="{{ route($viewdetailRouteNameControl.'.delete',['id'=>$viewdetailData['id']]) }}" class="badge badge-pill badge-danger">Delete</a>
                 </h4>
-                @if(isset($viewdetailData['classement']))
-                <div class="rating">
-                    <div class="stars">
-                        @for($i=0; $i<$viewdetailData['classement'][0]; $i++)
-                        <span class="fa fa-star checked"></span>
-                        @endfor
-                        @for($i=$viewdetailData['classement'][0]; $i<5; $i++)
-                        <span class="fa fa-star"></span>
-                        @endfor
-                    </div>
-                </div>
-                @endif
                 <dl class="row">
                     @foreach($viewdetailData as $k => $v)
                         @if($k!='nom' && $k!='id' && $k!='classement' && $v)

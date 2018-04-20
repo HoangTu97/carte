@@ -11,37 +11,31 @@ class RestaurantTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = Storage::disk('local')->get('data\restaurant\all.json');
+        $table = "restaurant";
+        $out = 'data\restaurant\all_filted.json';
+
+        // main function
+        $data = Storage::disk('local')->get($out);
         $data_decoded = json_decode($data,true);
-        
+
         foreach($data_decoded['values'] as $value) {
-            if ($value['type'] == 'RESTAURATION') {
-                DB::table('restaurant')->insert([
-                    'id' => $value['id'],
-                    'name' => $value['nom'],
-                    'classement' => intval($value['classement']),
-                    'email' => $value['email'],
-                    'website' => $value['siteweb'],
-                    'facebook' => $value['facebook'],
-                    'type' => $value['type'],
-                    'type_detail' => $value['type_detail'],
-                    'tarifenclair' => $value['tarifsenclair'],
-                    'tarifmax' => round($value['tarifsmax'], 2),
-                    'tarifmin' => round($value['tarifsmin'], 2),
-                    'telephone' => $value['telephone'],
-                    'telephonefax' => $value['telephonefax'],
-                    'fax' => $value['fax'],
-                    'created_date' => $value['date_creation'],
-                    'edited_date' => $value['last_update_fme'],
-                    'producteur' => $value['producteur']
-                ]);
-                DB::table('location')->insert([
-                    'id_rest' => $value['id'],
-                    'address' => $value['adresse'],
-                    'code_postal' => $value['codepostal'],
-                    'commune' => $value['commune'],
-                ]);
-            }
+            DB::table($table)->insert([
+                'id' => $value['id'],
+                'name' => $value['nom'],
+                'classement' => intval($value['classement']),
+                'email' => $value['email'],
+                'website' => $value['siteweb'],
+                'facebook' => $value['facebook'],
+                'tarifenclair' => $value['tarifsenclair'],
+                'tarifmax' => round($value['tarifsmax'], 2),
+                'tarifmin' => round($value['tarifsmin'], 2),
+                'telephone' => $value['telephone'],
+                'telephonefax' => $value['telephonefax'],
+                'fax' => $value['fax'],
+                'created_date' => $value['date_creation'],
+                'edited_date' => $value['last_update_fme'],
+                'producteur' => $value['producteur']
+            ]);
         }
     }
 }

@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix'=>'admin'], function () {
+Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);
     Route::get('/signin', ['as'=>'admin.signin','uses'=>'DashboardController@signin']);
     Route::get('/signup', ['as'=>'admin.signup','uses'=>'DashboardController@signup']);
@@ -19,7 +19,9 @@ Route::group(['prefix'=>'admin'], function () {
     Route::group(['prefix'=>'user'], function() {
         Route::get('/add', ['as'=>'admin.user.add','uses'=>'UserController@add']);
         Route::get('/list', ['as'=>'admin.user.list','uses'=>'UserController@list']);
-        Route::get('/edit', ['as'=>'admin.user.edit','uses'=>'UserController@edit']);
+        Route::get('/edit/{id}', ['as'=>'admin.user.edit','uses'=>'UserController@edit']);
+        Route::get('/delete/{id}', ['as'=>'admin.user.delete','uses'=>'UserController@delete']);
+        Route::get('/view/{id}', ['as'=>'admin.user.view','uses'=>'UserController@view']);
     });
     Route::group(['prefix'=>'restaurant'], function() {
         Route::get('/add', ['as'=>'admin.restaurant.add','uses'=>'RestaurantController@add']);
@@ -30,45 +32,36 @@ Route::group(['prefix'=>'admin'], function () {
         Route::get('/delete/{id}', ['as'=>'admin.restaurant.delete','uses'=>'RestaurantController@delete']);
         Route::get('/view/{id}', ['as'=>'admin.restaurant.view','uses'=>'RestaurantController@view']);
     });
+    Route::group(['prefix'=>'categorie'], function() {
+        Route::get('/add', ['as'=>'admin.cate.add', 'uses'=>'CategoryController@add']);
+        Route::post('/add', ['uses'=>'CategoryController@postAdd']);
+        Route::get('/list', ['as'=>'admin.cate.list', 'uses'=>'CategoryController@list']);
+        Route::get('/edit/{id}', ['as'=>'admin.cate.edit', 'uses'=>'CategoryController@edit']);
+        Route::post('/edit/{id}', ['uses'=>'CategoryController@postEdit']);
+        Route::get('/delete/{id}', ['as'=>'admin.cate.delete', 'uses'=>'CategoryController@delete']);
+        Route::get('/view/{id}', ['as'=>'admin.cate.view', 'uses'=>'CategoryController@view']);
+    });
 });
 
+Route::get('login', ['as'=>'login', 'uses'=>'UserController@getLogin']);
+Route::post('login', ['uses'=>'UserController@postLogin']);
+Route::get('register', ['as'=>'register', 'uses'=>'UserController@getRegister']);
+Route::post('register', ['uses'=>'UserController@postRegister']);
+Route::get('logout', ['as'=>'logout','uses'=>'UserController@logout']);
 
-Route::get('/test', function () {
-    $locations = DB::table('location')->whereNull('latitude')->select('id_rest','address','latitude')->get();
-        // Google api keys
-        $api_keys = array(
-                    env('GOOGLE_API_KEY', 'AIzaSyD5_8b7XGLJ_665C2Og6YV8Two7XOPN4h8'),
-                    env('GOOGLE_API_KEY_2', 'AIzaSyAIKAChlwMHxXoIW95UdgDmU5cQy23Zi8o'),
-                    env('GOOGLE_API_KEY_3', 'AIzaSyA7Dxr163l0sH-gBMCGhU4T4XgKNYN-pYA'),
-                    env('GOOGLE_API_KEY_4', 'AIzaSyD164wJgRiJnqXZ87m6MRutlq1qYzu8DL8')
-        );
+// Route::get('/test/address', function () {
+//     $error_request_file = 'data\\restaurant\\error_request.json';
+//     $data = Storage::disk('local')->get($error_request_file);
+//     $data_decoded = json_decode($data, true);
+    
+//     foreach($data_decoded as $value) {
+//         echo "<pre>";
+//         var_dump($value['adresse']);
 
-        $api_key_i = 0;
-        foreach($locations as $loc) {
-            // check null null position for not request all 
-            if ($loc->address && !$loc->latitude) {
-                $statusSuccess = false;
-                while(!$statusSuccess) {
-                    $queryString = "https://maps.googleapis.com/maps/api/geocode/json"."?address=".urlencode($loc->address)."&key=".$api_keys[$api_key_i];
-                    print("Address: " . $loc->address . " | " . $loc->latitude . '<br/>');
-                    print("Query: ".$queryString . "<br/>");
-                    $geo_locat = json_decode(file_get_contents($queryString), true);
+//         echo "</pre>";
+//     }
+// });
 
-                    if ($geo_locat['status'] == 'OVER_QUERY_LIMIT') {
-                        $api_key_i++;
-                    } elseif ($geo_locat['status'] == 'ZERO_RESULTS') {
-                        $statusSuccess = true;
-                    } elseif ($geo_locat['status'] == 'OK') {
-                        $statusSuccess = true;
-                        DB::table('location')
-                            ->where('id_rest', $loc->id_rest)
-                            ->update([
-                                'latitude'=>$geo_locat['results'][0]['geometry']['location']['lat'],
-                                'longitude'=>$geo_locat['results'][0]['geometry']['location']['lng']
-                            ]);
-                    }
-                    echo $geo_locat['status'] . '<br/>';
-                }
-            }
-        }
+Route::get('/test/horaire', function () {
+    
 });

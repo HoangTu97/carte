@@ -11,25 +11,26 @@
     </div>
     <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r" style='min-width: 320px;'>
         <h4 class="fw-300 c-grey-900 mB-40">Register</h4>
-        <form>
+        <form action="" method="post">
+            {!! Form::token() !!}
             <div class="form-group">
                 <label class="text-normal text-dark">Username</label>
-                <input type="text" class="form-control" Placeholder='John Doe'>
+                <input type="text" class="form-control" Placeholder='John Doe' name="username">
             </div>
             <div class="form-group">
                 <label class="text-normal text-dark">Email Address</label>
-                <input type="email" class="form-control" Placeholder='name@email.com'>
+                <input type="email" class="form-control" Placeholder='name@email.com' name="email">
             </div>
             <div class="form-group">
                 <label class="text-normal text-dark">Password</label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name="password">
             </div>
             <div class="form-group">
                 <label class="text-normal text-dark">Confirm Password</label>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name="repassword">
             </div>
             <div class="form-group">
-                <button class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Register</button>
             </div>
         </form>
     </div>

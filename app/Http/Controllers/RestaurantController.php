@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Storage;
 use DB;
+use Restaurant;
 
 class RestaurantController extends Controller
 {
@@ -14,7 +15,12 @@ class RestaurantController extends Controller
         return view('admin.pages.restaurant.add', ['restaurantAdd'=> $data_decoded]);
     }
 
-    public function postAdd() {
+    public function postAdd(Request $req) {
+        $restaurant = new Restaurant();
+        $restaurant->name = $req->nom;
+        $restaurant->type = 1;
+        $restaurant->classement = $req->class;
+        
         return redirect()->route('admin.restaurant.view',['id'=>0]);
     }
 
@@ -29,79 +35,36 @@ class RestaurantController extends Controller
     }
 
     public function delete($id) {
+        
         return redirect()->route('admin.restaurant.list');
     }
 
     public function view($id) {
-        $data = Storage::disk('local')->get('data\restaurant\one.json');
-        $data_decoded = json_decode($data,true);
-        return view('admin.pages.restaurant.view', ['dataViewDetail'=>$data_decoded]);
+        $db = (array)DB::table('restaurant')->where('id', $id)->join('location', 'restaurant.id', '=', 'location.id_rest')->join('resto_cate', 'resto_cate.id_resto', '=', 'restaurant.id')->get()->toArray();
+        
+        foreach($db as $value) {
+            $lCate[] = DB::table('category')->where('id', $value->id_cate)->first();
+        }
+        //dd ($lCate);
+        $first = (array)$db[0];
+        $first['type'] = '';
+        foreach($lCate as $value) {
+            $first['type'] .= $value->nom . '; ';
+        }
+        unset($first['id_cate']);
+        unset($first['id_resto']);
+        $data = $first;
+
+        return view('admin.pages.restaurant.view', ['dataViewDetail'=>$data]);
     }
 
-    private function fieldData() {
-        $in = 'data\restaurant\all.json';
-        $out = 'data\restaurant\all_filted.json';
-        if(Storage::disk('local')->exists($out)) {
-            return json_decode(Storage::disk('local')->get($out),true);
-        }
-        $data = Storage::disk('local')->get($in);
-        $data_decoded = json_decode($data,true);
-        $data_field['fields'] = array(  'id', 'nom', 'type', 
-                                        'ouverture', 'adresse', 'classement', 
-                                        'contactez', 'tarif');
-        foreach($data_decoded['values'] as $k => $v) {
-            $data_field['values'][$k]['id'] = $v['id'];
-            $data_field['values'][$k]['nom'] = $v['nom'];
-            $data_field['values'][$k]['type'] = $v['type'].( $v['type_detail'] ? ' ('.$v['type_detail'].')' : '');
-            $data_field['values'][$k]['ouverture'] = $v['ouverture'];
-            $data_field['values'][$k]['adresse'] = $v['adresse'].', '.$v['codepostal'].' '.$v['commune'];
-            $data_field['values'][$k]['classement'] = $v['classement'];
-            $data_field['values'][$k]['contactez'] = 'tel: '.$v['telephone'].'<br/>'.'site: '.$v['siteweb'].'<br/>'.'email: '.$v['email'];
-            $data_field['values'][$k]['tarif'] = ($v['tarifsmin']?'€':'').round($v['tarifsmin'], 2).' - '.($v['tarifsmax']?'€':'').round($v['tarifsmax'], 2);
-        }
-        Storage::disk('local')->put($out, json_encode($data_field));
-        return $data_field;
-    }
-
-    private function field100() {
-        $in = 'data\restaurant\all_filted.json';
-        $out = 'data\restaurant\all_filted_100.json';
-        if(Storage::disk('local')->exists($out)) {
-            return json_decode(Storage::disk('local')->get($out),true);
-        }
-        $data = Storage::disk('local')->get($in);
-        $data_decoded = json_decode($data,true);
-
-        $data_field['fields'] = $data_decoded['fields'];
-
-        $i = 0;
-        foreach($data_decoded['values'] as $k => $v) {
-            if($i++ > 100)
-                break;
-            $data_field['values'][$k] = $v;
-        }
-
-        Storage::disk('local')->put($out, json_encode($data_field));
-        return $data_field;
-    }
-
-    public function list(Request $req) {
-        // $data_field = $this->fieldData();
-        // $data_field = $this->field100();
-        // $data_field = array();
-
-        // $data_field['fields'] = ['id','nom','type','ouverture','address','classement','contactez','tarif'];
-        // $data_field['values'] = json_decode(json_encode(DB::table('restaurant')
-        //     ->join('location','restaurant.id','=','location.id_rest')
-        //     ->select('restaurant.id', 'restaurant.name as nom','restaurant.type','restaurant.type_detail AS ouverture', 'location.address','restaurant.classement', 'restaurant.website AS contactez', 'restaurant.tarifmax AS tarif')->get()->toArray()),true);
-        //return view('admin.pages.restaurant.list', ['restaurants'=>$data_field]);
-
-        if ($req->query('page')) {
-            echo "abc";
-        }
-        else {
-            return view('admin.pages.restaurant.list');
-        }
+    public function list() {
+        $data_field = array();
+        $data_field['fields'] = ['id','nom','address','classement','contactez','tarif'];
+        $data_field['values'] = json_decode(json_encode(DB::table('restaurant')
+            ->join('location','restaurant.id','=','location.id_rest')
+            ->select('restaurant.id', 'restaurant.nom', 'location.address','restaurant.classement', 'restaurant.website AS contactez', 'restaurant.tarifmax AS tarif')->get()->toArray()),true);
+        return view('admin.pages.restaurant.list', ['restaurants'=>$data_field]);
     }
 
 

@@ -21,11 +21,11 @@ class CreateUsersTable extends Migration
                     CONSTRAINT \"User_pkey\"
                     PRIMARY KEY,
                 username  VARCHAR(20)                                        NOT NULL,
-                password  VARCHAR(20)                                        NOT NULL,
+                password  VARCHAR(100)                                        NOT NULL,
                 email     VARCHAR(50),
                 firstname VARCHAR(50),
                 lastname  VARCHAR(50),
-                adress    VARCHAR(250),
+                address    VARCHAR(250),
                 level     BIT
             );
         ");

@@ -6,7 +6,6 @@ use Folklore\GraphQL\Support\Query;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use GraphQL;
-use App\Location;
 use DB;
 
 class LocationQuery extends Query
@@ -49,7 +48,7 @@ class LocationQuery extends Query
  ");
         $ret = DB::table(
             $sub)
-            ->select('id_rest as id', 'address','latitude','longitude')
+            ->select('id_rest as id', 'address','latitude as lat','longitude as long')
             ->where('distance' ,'<=',$radius)
             ->orderBy('distance')->get();
             

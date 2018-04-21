@@ -124,7 +124,10 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                'location'=>'App\GraphQL\Query\LocationQuery'
+                'location'=>'App\GraphQL\Query\LocationQuery',
+                'horaire'=>'App\GraphQL\Query\HoraireQuery',
+                'category'=>'App\GraphQL\Query\CategoryQuery',
+                'resto'=>'App\GraphQL\Query\RestaurantQuery'
             ],
             'mutation' => [
 
@@ -181,7 +184,10 @@ return [
      * ]
      */
     'types' => [
-        'Location'=>'App\GraphQL\Type\LocationType'
+        'Location'=>'App\GraphQL\Type\LocationType',
+        'HoraireType'=>'App\GraphQL\Type\HoraireType',
+        'CategoryType'=>'App\GraphQL\Type\CategoryType',
+        'RestaurantType'=>'App\GraphQL\Type\RestaurantType',
     ],
 
     /*

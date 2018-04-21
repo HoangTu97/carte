@@ -6,27 +6,18 @@ use GraphQL\Type\Definition\Type;
 use Folklore\GraphQL\Support\Type as BaseType;
 use GraphQL;
 
-class LocationType extends BaseType
+class CategoryType extends BaseType
 {
     protected $attributes = [
-        'name' => 'Location',
+        'name' => 'CategoryType',
         'description' => 'A type'
     ];
 
     public function fields()
     {
         return [
-            'id'=>[
-                'type'=>Type::int()
-            ],
-            'address' => [
+            'nom' => [
                 'type' => Type::string()
-            ],
-            'lat' => [
-                'type' => Type::float()
-            ],
-            'long' => [
-                'type' => Type::float()
             ]
         ];
     }

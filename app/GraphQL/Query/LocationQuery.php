@@ -48,7 +48,7 @@ class LocationQuery extends Query
  ");
         $ret = DB::table(
             $sub)
-            ->select('id_rest as id', 'address','latitude as lat','longitude as long')
+            ->select('id_rest as id', 'address','latitude as lat','longitude as lng')
             ->where('distance' ,'<=',$radius)
             ->orderBy('distance')->get();
             

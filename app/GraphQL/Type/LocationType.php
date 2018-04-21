@@ -25,7 +25,7 @@ class LocationType extends BaseType
             'lat' => [
                 'type' => Type::float()
             ],
-            'long' => [
+            'lng' => [
                 'type' => Type::float()
             ]
         ];

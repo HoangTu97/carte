@@ -127,7 +127,8 @@ return [
                 'location'=>'App\GraphQL\Query\LocationQuery',
                 'horaire'=>'App\GraphQL\Query\HoraireQuery',
                 'category'=>'App\GraphQL\Query\CategoryQuery',
-                'resto'=>'App\GraphQL\Query\RestaurantQuery'
+                'resto'=>'App\GraphQL\Query\RestaurantQuery',
+                'search' => 'App\GraphQL\Query\SearchQuery'
             ],
             'mutation' => [
 
@@ -188,6 +189,7 @@ return [
         'HoraireType'=>'App\GraphQL\Type\HoraireType',
         'CategoryType'=>'App\GraphQL\Type\CategoryType',
         'RestaurantType'=>'App\GraphQL\Type\RestaurantType',
+        'SearchType' => 'App\GraphQL\Type\SearchType'
     ],
 
     /*

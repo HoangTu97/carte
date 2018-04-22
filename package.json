@@ -16,6 +16,12 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "gulp": "^3.9.1",
+        "gulp-cli": "^2.0.1",
+        "gulp-csso": "^3.0.1",
+        "gulp-sass": "^3.1.0",
+        "webpack": "^4.1.1",
+        "webpack-dev-server": "^3.1.0"
     }
 }

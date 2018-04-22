@@ -1,0 +1,116 @@
+.container-top {
+    max-height: 50px;
+    background-color: #dfdfdf;
+    .brand-top {
+        margin: 0px;
+        padding: 0px;
+        @include display-box;
+    }
+    .menu-top {
+        @include display-box;
+        input#search {
+            border: none;
+            background-color: #dfdfdf;
+            &:focus {
+                width: 15.5rem;
+                max-width: 250px;
+                outline: none;
+                border-bottom: solid 1px;
+                background-color: #dfdfdf;
+            }
+        }
+        button.btn-search {
+            margin: 0px;
+            padding: 2px 7px 7px 7px;
+            background: transparent;
+            border: none;
+            &:hover {
+                outline: none;
+                background-color: #f2f2f2;
+            }
+            img {
+                max-width: 15px;
+            }
+        }
+    }
+    .user {
+        float: right;
+        padding: 0px;
+        margin: 0px;
+        @include display-box($jc: center, $ai: center);
+        .user-span {
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #757575;
+        }
+    }
+}
+
+.container-main {
+    height: 54rem;
+    max-height: 850px;
+    background-color: #f5f5f5;
+    .side-bar-left {
+        padding: 0; 
+        // border: #004E98 1px solid;
+        .side-bar-left-header {
+            @include display-header;
+            background-color: #E5E5E5;
+        }
+    }
+    .content-info {
+        color: #7f7f7f !important;
+        padding: 0; 
+        // border: #004E98 1px solid;
+        // border-left: none;
+        .content-info-header {
+            @include display-header;
+            background-color: #E5E5E5;
+        }
+        .content-info-main {
+            
+            padding-left: 25px;
+        }
+        .content-info-horaires-list {
+            padding: 0px;
+        }
+        .content-info-horaires-item {
+            list-style-type: none;
+            margin-bottom: 15px;
+        }
+        .content-info-img-list {
+            padding: 0px;
+        }
+        .content-info-img-item {
+            padding: 2.5px 5px 0px 0px;
+            list-style-type: none;
+            img {
+                width: 280px;
+            }
+            button {
+                width: 100%;
+                background-color: #f0f0f0;
+                border: none;
+                &:focus,
+                &:hover {
+                    background-color: #cfcfcf !important;
+                }
+            }
+        }
+    }
+    .content-map {
+        padding: 0; // border: #004E98 1px solid;
+        // border-left: none;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+}
+
+.hidden-class {
+    display: none;
+}
+
+.show-class {
+    display: inline;
+}

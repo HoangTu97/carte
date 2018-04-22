@@ -1,0 +1,13 @@
+@mixin display-box($ds:flex, $jc:center, $ai: center, $va: middle) {
+    display: $ds;
+    justify-content: $jc;
+    align-items: $ai;
+    vertical-align: $va;
+}
+
+@mixin display-header {                
+    padding-bottom: 0.5rem;
+    padding-left: 0rem;
+    @include display-box;
+    //border-bottom: 1px solid #004E98;
+}

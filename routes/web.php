@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('index');
+});
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function () {
     Route::get('/', ['as'=>'admin.index','uses'=>'DashboardController@show']);
@@ -48,20 +51,3 @@ Route::post('login', ['uses'=>'UserController@postLogin']);
 Route::get('register', ['as'=>'register', 'uses'=>'UserController@getRegister']);
 Route::post('register', ['uses'=>'UserController@postRegister']);
 Route::get('logout', ['as'=>'logout','uses'=>'UserController@logout']);
-
-// Route::get('/test/address', function () {
-//     $error_request_file = 'data\\restaurant\\error_request.json';
-//     $data = Storage::disk('local')->get($error_request_file);
-//     $data_decoded = json_decode($data, true);
-    
-//     foreach($data_decoded as $value) {
-//         echo "<pre>";
-//         var_dump($value['adresse']);
-
-//         echo "</pre>";
-//     }
-// });
-
-Route::get('/test/horaire', function () {
-    
-});

@@ -1,0 +1,21 @@
+.logo-top {
+    float: left;
+    height: 50px;
+    width: 50px;
+    padding: 0px;
+    margin: 0px;
+    background-image: url('/img/logo-map.png');
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    background-position: center;
+    @include display-box;
+}
+
+.brand-top {
+    .brand-top-span {
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #757575;
+    }
+}

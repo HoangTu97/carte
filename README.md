@@ -7,8 +7,8 @@
 
 ## Les informations du group
 #### Étudiants de l'université Claude Bernard Lyon 1 ####
-1. Student 1: 11520021, Nguyễn Phan Minh Phú
-2. Student 2: 11520027, Nguyễn Xuân Hoàng Tú
+1. Student 1: 11520021, NGUYEN Phan Minh Phu
+2. Student 2: 11520027, NGUYEN Xuan Hoang Tu
 
 ## Installation
 ### Environnement
@@ -18,6 +18,7 @@
 * [GPS](#) - Trouver les coordonnées du client
 * [Bootstrap](https://getbootstrap.com/) - Améliorer de l'interface du site
 * [Gulp](https://gulpjs.com/) - Compiler Sass
+* [GrandLyon](https://www.grandlyon.com/) - Trouver les infos des restos
 
 ### Installation
 * Télécharger le code source

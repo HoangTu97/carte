@@ -52,9 +52,9 @@ php artisan serve
 
 ### Les comptes dans la base de donnée
 * (username - password)
-* user1 - 123 (Tài khoản dành cho nhân viên)
-* admin - 123
-* user2 - 123
+* admin - 123 (administrator)
+* user1 - 123 (client)
+* user2 - 123 (client)
 
 ## Demo
 

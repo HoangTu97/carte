@@ -40,7 +40,7 @@ function initMap() {
     return new google.maps.Marker({
       position: location,
       //label: labels[i % labels.length],
-      title: location.address,
+      //title: location.address,
       //icon: iconBase + 'parking_lot_maps.png'
     });
   });

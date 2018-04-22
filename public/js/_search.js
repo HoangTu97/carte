@@ -6,13 +6,12 @@ function search() {
         url: "https://map-stores.herokuapp.com/graphql",
         type: 'get',
         data: {
-            query: 'query{resto(nom:' + input + '){lat,lng}}'
+            query: 'query{search(value:"' + input + '"){nom,lat,lng}}'
         },
         crossDomain: true,
         origin: "*",
         dataType: "JSON",
         success: function (res) {
-            console.log(res);
         }
     })
 }
@@ -31,8 +30,6 @@ function getByID(_lat, _long) {
             setAddress(res.data.location[0].address);
             getContact(res.data.location[0].id);
             getHoraire(res.data.location[0].id);
-            console.log(res.data.location[0].address);
-            console.log(res.data.location[0].id);
         }
     })
 }
@@ -49,7 +46,6 @@ function getContact(_id) {
         dataType: "JSON",
         success: function (res) {
             setContact(res.data.resto[0]);
-            console.log(res.data.resto[0]);
         }
     })
 }
@@ -65,8 +61,7 @@ function getHoraire(_id) {
         origin: "*",
         dataType: "JSON",
         success: function (res) {
-            setHoraire(res.data.horaire)           
-            console.log(res.data);
+            setHoraire(res.data.horaire);   
         }
     })
 }

@@ -40,7 +40,7 @@ function initMap() {
     return new google.maps.Marker({
       position: location,
       //label: labels[i % labels.length],
-      title: "Restaurant " + i,
+      title: location.address,
       //icon: iconBase + 'parking_lot_maps.png'
     });
   });
@@ -49,7 +49,6 @@ function initMap() {
     google.maps.event.addDomListener(marker, "click", function (event) {
       var latitude = event.latLng.lat().toFixed(5);
       var longitude = event.latLng.lng().toFixed(5);
-      console.log(latitude + ', ' + longitude);
       getByID(latitude,longitude);
     });
   })

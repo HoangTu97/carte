@@ -9,7 +9,6 @@ $($.ajax({
     origin: "*",
     dataType: "JSON",
     success: function (res) {
-        console.log(res);
         locations = res.data.location;
         initMap();
     }

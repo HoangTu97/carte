@@ -9,8 +9,7 @@ function setContact(_details) {
 
 function setHoraire(_horaire) {
     if (_horaire.length == 0) {
-        $('.content-info-horaires-list').css('display', 'none')
-        
-        console.log("Array None Of Elements");
+        //$('.content-info-horaires-list').css('display', 'none');        
+        console.log("Le restaurant n'a pas encore les horaires");
     }
 }
